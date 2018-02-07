@@ -4,7 +4,7 @@ import { FBroot } from '../fbmodel/fbrootdt';
 import { Router } from '@angular/router';
 import { FBfetchDtServe } from '../fbfecthdt.serve';
 import { FBrequestresult, FBresult, FBrequest } from '../fbmodel/fbresult';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'fbroot',
   templateUrl: './fbroot.component.html',
@@ -18,7 +18,7 @@ export class FbrootComponent implements OnInit {
   debugText: any;
   loggedInUser:string;
   htmlOnError:string;
-  constructor(private fb: FormBuilder, private fecthServe: FBfetchDtServe, private route: Router) { }
+  constructor(private fb: FormBuilder, private fecthServe: FBfetchDtServe, private route: Router) {}
   ngOnInit() {
     this.getRootDt();
     // this.rootDt=this.getRootDt();
@@ -76,8 +76,25 @@ export class FbrootComponent implements OnInit {
     );
   }
   submitFb(value: FormGroup) {
-    this.parseResult(value);
-    this.route.navigate(['logout']);
+    swal({
+            title: 'Confirm Submit',
+            text: 'Really Want to submit?',
+            type: 'question',
+            showCancelButton:true,
+            confirmButtonText: 'Submit',
+            cancelButtonText:'Cancel'
+          }).then((result)=>{
+            if(result.value==true)
+            {
+              this.parseResult(value);
+              swal({
+                title:"Success",
+                type:'success',
+                text:'Submitted Succesfully'
+              }).then((result)=>
+                  this.route.navigate(['logout'])
+            );
+        }});
   }
   private parseResult(v1) {
     let academicyear = v1.academicyear;
@@ -112,7 +129,7 @@ export class FbrootComponent implements OnInit {
             console.log(dt);
             const tempRequest={userId:this.debugText.userId};
             console.log('----',tempRequest);
-            
+
             this.fecthServe.setCompletedStatus(tempRequest)
               .subscribe((result)=>{
                   if(result.status)

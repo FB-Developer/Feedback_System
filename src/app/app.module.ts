@@ -4,9 +4,12 @@ import { AppComponent } from './app.component';
 import {RouterModule} from '@angular/router';
 import {LoginModule} from './login/login.module';
 import {Fbformv1Module} from './fbformv1/fbformv1.module';
-import {AddfacultydetailModule} from './addfacultydetail/addfacultydetail.module';
 import {RoutingModule} from './routing/routing.module';
+import {FacultyModule} from './faculty/faculty.module';
+import {FbresultModule} from './fbresult/fbresult.module';
+
 @NgModule({
+  
   declarations: [
     AppComponent
   ],
@@ -15,8 +18,8 @@ import {RoutingModule} from './routing/routing.module';
     LoginModule,
     Fbformv1Module,
     RoutingModule,
-    AddfacultydetailModule
-  ],
+    FacultyModule,
+    FbresultModule  ],
   providers: [],
   bootstrap: [AppComponent]
 })

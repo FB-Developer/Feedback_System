@@ -1,6 +1,6 @@
 <div [formGroup]='facultyFG' class="p-1" style="border-bottom:1px solid teal">
-     <label class="form-label h5">Faculty Name: {{faculty.fname}}</label>
-     <label class="form-label h5">Faculty Dept: {{faculty.fdept}}</label>
+     <label class="form-label h5"><strong>Name:</strong> {{faculty.fname}}</label>
+     <label class="form-label h5"><strong>Dept:</strong> {{faculty.fdept}}</label>
      <span *ngIf="!facultyFG.controls['rating'].valid && facultyFG.controls['rating'].touched" class="text-error p-1" style="">Required To Select an Option</span>
       <div style="text-align:center;border-bottom:1px solid;border-top:1px solid;padding-top:5px;padding-bottom:5px;">
         <label class="form-radio ">
@@ -25,7 +25,7 @@
       <div class="form-horizontal" style="padding-top:10px;padding-bottom:10px;">
         <div class="form-group">
         <label class="form-label h5 col-2">Score:</label>
-        <input formControlName='score' class="form-input" (keypress)="restricRangeValue($event)" type="number" (ngModelChange)='onChangeScore($event)' style="padding:0px;box-shadow:2px 2px 20px lightgray">
+        <input formControlName='score' class="form-input input-sm" (keypress)="restricRangeValue($event)" type="number" (ngModelChange)='onChangeScore($event)' style="box-shadow:2px 2px 20px lightgray">
         </div>
       </div>
 </div>

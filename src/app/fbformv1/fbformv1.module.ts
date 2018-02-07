@@ -10,12 +10,13 @@ import { FbsectionListComponent } from './fbsection-list/fbsection-list.componen
 import { FbsubjectListComponent } from './fbsubject-list/fbsubject-list.component';
 import { FbfacultyListComponent } from './fbfaculty-list/fbfaculty-list.component';
 import {FBfetchDtServe} from './fbfecthdt.serve';
-
+import {CommonsectionModule} from '../commonsection/commonsection.module';
 @NgModule({
   imports: [
       CommonModule,
       HttpModule,
       ReactiveFormsModule,
+      CommonsectionModule
   ],
      declarations: [
     FbrootComponent,

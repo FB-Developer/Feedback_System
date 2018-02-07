@@ -4,15 +4,14 @@ import {FbrootComponent} from '../fbformv1/fbroot/fbroot.component';
 import {LoginComponent} from '../login/login/login.component';
 import {LogoutComponent} from '../login/login/logout.component';
 import { RouterModule,Routes } from '@angular/router';
-import {FacultyrootComponent} from '../addfacultydetail/facultyroot/facultyroot.component';
 import {AuthGuard} from './auth.guard';
+import {FbresultModule} from '../fbresult/fbresult.module';
+
 const routeList:Routes = [
   {
     path:'',
-    redirectTo:'addfacultydetail',
+    redirectTo:'fbform',
     pathMatch:'full'
-    // redirectTo:'fbform',
-    // pathMatch:'full'
   },
   {
     path:'login',component:LoginComponent
@@ -22,12 +21,20 @@ const routeList:Routes = [
   },
   {
     path:'fbform',
-    canActivate:[AuthGuard],canDeactivate:[AuthGuard],
+    canActivate:[AuthGuard],
     component:FbrootComponent
   },
   {
-    path:'addfacultydetail',
-    component:FacultyrootComponent
+    path:'faculty',
+    loadChildren:'app/faculty/faculty.module#FacultyModule'
+  },
+  {
+    path:'fbresult',
+    loadChildren:'app/fbresult/fbresult.module#FbresultModule'
+  },
+  {
+    path:'**',
+    component:FbrootComponent
   }
 ];
 @NgModule({
