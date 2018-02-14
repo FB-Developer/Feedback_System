@@ -1,5 +1,6 @@
-<div style="background:white; padding:2%;color: gray;border-radius:5px;box-shadow:2px 2px 10px lightgray,-2px -2px 10px lightgray;">
-  <fb-header></fb-header>  <div style='margin-top:2%;border:1px solid gray;box-shadow:2px 2px 10px gray,-2px -2px 10px lightgray;'>
+<div [ngClass]="{'blurred':insertStudentFlag}" style="background:white; padding:2%;color: gray;border-radius:5px;box-shadow:2px 2px 10px lightgray,-2px -2px 10px lightgray;">
+  <fb-header></fb-header>
+  <div style='margin-top:2%;border:1px solid gray;box-shadow:2px 2px 10px gray,-2px -2px 10px lightgray;'>
       <table class="table">
         <thead>
            <tr>
@@ -41,10 +42,10 @@
     </div>
     <div class="conatiner p-2" style='margin-top:2%;'>
         <div class=" float-right">
-            <button type="button" class="btn btn-sm btn-primary">
+            <button (click)='showInsertStudent()' type="button" class="btn btn-sm btn-primary">
                 <i class="mr-2 icon icon-plus"></i>Add Student
             </button>
-            <button type="button" [disabled]='!deleteFlag' class="btn btn-sm btn-primary">
+            <button (click)='deleteSelected()' type="button" [disabled]='!deleteFlag' class="btn btn-sm btn-primary">
                 <i class="mr-2 icon icon-delete" ></i>Delete Selected
             </button>
         </div>
@@ -102,4 +103,62 @@
         </table>
       </div>
 </div>
+</div>
+
+<div class="modal text-primary" [ngClass]="{'active':insertStudentFlag}">
+  <div class="modal-container bordered">
+      <div class="modal-header">
+      <a class="btn btn-clear float-right" (click)='closeInsertStudentDlg()' aria-label="Close"></a>
+      <div class="modal-title h5">Add Student</div>
+    </div>
+
+    <form class="form-horizontal m-2" #test1='ngForm'>
+        <div class="container">
+            <p>{{test1.value|json}}</p>
+            <div class="form-group columns">
+                <label class="form-label col-5">Academic Year</label>
+                  <select class="form-select col-7" name="academicyear" ngModel required>
+                    <option *ngFor="let academicyear of academicyearList" [value]='academicyear'>{{academicyear}}</option>
+                  </select>
+            </div>
+            <div class="form-group columns">
+                    <label class="form-l col-5">Department</label>
+                  <select class="form-select col-7" name='dept' ngModel required>
+                    <option *ngFor="let department of departmentList" [value]='department'>{{department}}</option>
+                  </select>
+              </div>
+                <div class="form-group columns">
+                    <label class="form-label col-5">Degree</label>
+                  <select class="form-select col-7" name='degree' ngModel required>
+                    <option *ngFor="let degree of degreeList" [value]='degree'>{{degree}}</option>
+                  </select>
+              </div>
+                <div class="form-group columns">
+                    <label class="form-label col-5">Sem</label>
+                  <select class="form-select col-7" name='sem' ngModel required>
+                    <option *ngFor="let sem of semList" [value]='sem'>{{sem}}</option>
+                  </select>
+              </div>
+              <div class="form-group columns">
+                    <label class="form-label col-5">Class</label>
+                  <select class="form-select col-7" name='class' ngModel required>
+                    <option *ngFor="let class of classList" [value]='class'>{{class}}</option>
+                  </select>
+              </div>
+              <div class="form-group columns">
+                  <label class="form-label col-5">Batch</label>
+                  <input class="form-input col-7" type="text" name='batch' ngModel required>
+              </div>
+          <div class="form-group columns">
+              <input class="form-input" type="text" id="userId" placeholder="Enrollment Number" name='userId' ngModel required>
+          </div>
+          <div class="form-group columns">
+                  <input class="form-input mt-1" type="text" id="userId" placeholder="User Name" name='userName' ngModel required>
+          </div>
+          <div class="columns btn-group">
+              <button [disabled]='!test1.valid' (click)='insertStudent(test1.value)' type="button" class="btn btn-primary"> Add Student</button>
+          </div>
+    </div>
+  </form>
+  </div>
 </div>

@@ -18,7 +18,20 @@ export class ManagestudentService {
     return this.http.get(tempurl1)
       .map((response:Response)=>response.json());
   }
+  insertUser(user1:any)
+  {
+      const url1=this.urlcompleted+'/adduser';
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
 
+      return this.http.post(url1,user1,options)
+        .map((response:Response)=>return response.json());
+  }
+  deleteSelected(idList:string[]){
+      const url2dlt:string=this.urlcompleted+'/deleteusers?idList=['+idList+']';
+      return this.http.delete(url2dlt)
+        .map((response:Response)=>response.json());
+  }
   setCompleted(userId:string,completed:boolean){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

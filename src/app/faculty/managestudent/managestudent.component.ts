@@ -7,9 +7,10 @@ import * as _ from 'lodash';
   templateUrl: './managestudent.component.html',
   styleUrls: ['./managestudent.component.css']
 })
-
 export class ManagestudentComponent implements OnInit {
+    insertStudentFlag:boolean=false;
   academicyearList=config.academicyearList;
+
   degreeList=config.degreeList;
   departmentList=config.departmentList;
   semList=config.semList;
@@ -48,6 +49,36 @@ export class ManagestudentComponent implements OnInit {
             return !student.studentdetail.completed;
         });
   }
+  showInsertStudent(){
+      this.insertStudentFlag=true;
+  }
+  insertStudent(ob:any){
+      console.log('****',ob);
+      let user1:any={
+
+          "userId":ob.userId,
+          "userName":ob.userName,
+          "password": ob.userId,
+          "userRole":"student",
+          "studentdetail":{
+              "academicyear":ob.academicyear,
+              "degree":ob.degree,
+              "dept":ob.dept,
+              "sem":ob.sem,
+              "class":ob.class,
+              "batch":ob.batch,
+              "completed":false
+          }
+      };
+      this.manageser.insertUser(user1)
+      .subscribe(dt=>{
+          this.insertStudentFlag=false;
+          console.log(dt);
+      });
+  }
+  closeInsertStudentDlg(){
+      this.insertStudentFlag=false;
+  }
   findByUserID()
   {
     this.tempList=_.filter(this.studentList,(student)=>{
@@ -65,8 +96,19 @@ export class ManagestudentComponent implements OnInit {
     this.deleteFlag=false;
     if(this.deleteList.length>0)
         this.deleteFlag=true;
-        this.deleteList.map(temp=>console.log('****',temp));
-    console.log('----',this.deleteList.length);
+}
+deleteSelected(){
+    this.deleteList.map(temp=>console.log('****',temp));
+    this.manageser.deleteSelected(this.deleteList)
+        .subscribe((dt)=>{
+            console.log(dt);
+            if(dt.mesg.n>0){
+
+                    this.deleteList.map((dt2dlt)=>{
+                        _.remove(this.tempList,(temp)=>{ return temp.userId==dt2dlt});
+                });
+            }
+        });
 }
   findByUserName()
   {
@@ -91,10 +133,20 @@ export class ManagestudentComponent implements OnInit {
     })
   }
   selectall(event){
-      console.log('****',event);
       if(this.allselected)
+      {
         this.deleteFlag=true;
+        this.deleteList=new Array();
+        this.tempList.map(dt=>{
+            this.deleteList.push(dt.userId);
+        });
+        }
     else
-    this.deleteFlag=false;
+    {
+            let length=this.deleteList.length;
+            this.deleteList.splice(0,length);
+            this.allselected=false;
+            this.deleteFlag=false;
+    }
   }
 }

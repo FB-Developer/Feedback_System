@@ -30,12 +30,29 @@
   <tr  *ngFor="let temp of overallFB;let indx=index">
 
       <td>
-        <button (click)="resultDetail(temp._id)" class="btn btn-link c-hand tooltip" data-tooltip="click on name for details">{{temp._id}}</button>
+        <button (click)="resultDetail(temp._id)" class="btn btn-link c-hand tooltip" data-tooltip="Click on name for more details">{{temp._id}}</button>
       </td>
-      <td class="tooltip" data-tooltip="click on name for details">
-          <div *ngFor="let tt of temp.rating_group">
-            <span> <b style="color:gray">{{tt.rating}}</b> <i style="color:teal">{{tt.count}}</i></span>
-          </div>
+      <td>
+          <div class="popover popover-right">
+              <div *ngFor="let tt of temp.rating_group">
+                <span> <b style="color:gray">{{tt.rating}}</b> <i style="color:teal">{{tt.count}}</i></span>
+              </div>
+              <div class="popover-container">
+                <div class="card">
+                  <div class="card-header">
+                      <div class="text-center text-bold" style="color:bg-primary">Chart Summary</div>
+                  </div>
+                  <div class="card-body">
+                      <canvas baseChart
+                            [data]=temp.fbchartdt
+                            [labels]=temp.fbchartrating
+                            [chartType]='"pie"'
+                            >
+                        </canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
       </td>
       <!-- <td>
           <div *ngFor="let tt of temp.rating_group">

@@ -6,7 +6,7 @@ import { OverallFbComponent } from './overall-fb/overall-fb.component';
 import { DetailFbComponent } from './detail-fb/detail-fb.component';
 import {FbresultService} from './fbresult.service';
 import {CommonsectionModule} from '../commonsection/commonsection.module';
-
+import { ChartsModule } from 'ng2-charts';
 const routes: Routes = [
   {
     path: '',
@@ -31,6 +31,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     CommonsectionModule,
+    ChartsModule,
     RouterModule.forChild(routes)
 ],
   declarations: [OverallFbComponent, DetailFbComponent],
