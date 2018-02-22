@@ -7,6 +7,7 @@ import {FBroot} from '../../fbmodel/fbrootdt';
 @Injectable()
 export class GetformsService {
   url1:string='http://100.100.102.124:4400/users/fbformlistbydept';
+  urlformdeleteurl:string='http://100.100.102.124:4400/users/deletefbdetail';
   urlformdetail:string='http://100.100.102.124:4400/users/fbformdetail';
   constructor(private http:Http){
   }
@@ -16,7 +17,12 @@ export class GetformsService {
     return this.http.get(tempurl1)
       .map((response:Response)=>response.json());
   }
-
+  deleteFbDetail(academicyear:string,dept:string,class1:string,sem:string,degree:string){
+        let tempurl1=this.urlformdeleteurl+'?academicyear='+academicyear+'&dept='+dept+'&class='+class1+'&degree='+degree+'&sem='+sem;
+        console.log('****',tempurl1);
+        return this.http.delete(tempurl1)
+          .map((response:Response)=>response.json());
+  }
   getFormDetail(academicyear:string,dept:string,class1:string,sem:string,degree:string){
     let tempurl1=this.urlformdetail+'?academicyear='+academicyear+'&dept='+dept+'&class='+class1+'&degree='+degree+'&sem='+sem;
     console.log('****',tempurl1);

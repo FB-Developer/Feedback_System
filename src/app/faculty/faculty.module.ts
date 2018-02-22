@@ -27,7 +27,16 @@ const routes: Routes = [
   },
   {
     path:'addfacultydetail',
-    component:FacultyrootComponent
+    children:[
+        {
+            path:'',
+            component:FacultyrootComponent
+        },
+        {
+            path:'update',
+            component:FacultyrootComponent
+        }
+    ]
   },
   {
     path:'forms',

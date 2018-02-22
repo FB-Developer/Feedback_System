@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GetformsService} from './getforms.service';
 import {config} from '../facultyconfig';
 import {Router} from '@angular/router';
+import swal from 'sweetalert2';
 
 class FormInfo{
   academicyear:string;
@@ -39,9 +40,31 @@ dept:string='CE';
   {
     this.router.navigate(['faculty/forms/formdetail',detail.academicyear,detail.dept,detail.sem,detail.class,detail.degree]);
   }
-  deleteForm(detail:FormInfo)
+  updateForm(detail:FormInfo)
   {
     console.log("****",detail);
   }
-
+  deleteForm(detail:FormInfo){
+      swal({
+              title: 'Confirm Delete',
+              text: 'Really Want to Delete?',
+              type: 'question',
+              showCancelButton:true,
+              confirmButtonText: 'Delete',
+              cancelButtonText:'Cancel'
+            }).then((result)=>{
+              if(result.value==true)
+              {
+                  this.gf.deleteFbDetail(detail.academicyear,detail.dept,detail.class,detail.sem,detail.degree)
+                  .subscribe(dt=>{
+                      console.log('****',dt);
+                  });
+                swal({
+                  title:"Success",
+                  type:'success',
+                  text:'Deleted Succesfully'
+              }).then((result)=> {this.loadFormField();}
+              );
+        }});
+  }
 }

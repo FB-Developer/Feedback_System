@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
   templateUrl: './fbroot.component.html',
   styleUrls: ['./fbroot.component.css']
 })
+
 export class FbrootComponent implements OnInit {
   public rootFG: FormGroup;
   public rootDt: FBroot;

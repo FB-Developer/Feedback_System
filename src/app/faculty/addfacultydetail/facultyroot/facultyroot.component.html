@@ -51,7 +51,7 @@
   <!-- <div *ngIf="errorMesg" class="toast toast-error">
     {{errorMesg}}
   </div> -->
-  <p>
+  <p *ngIf="rootFG">
     {{rootFG.value|json}}
   </p>
 </div>

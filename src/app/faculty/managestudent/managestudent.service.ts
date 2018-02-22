@@ -25,7 +25,7 @@ export class ManagestudentService {
       let options = new RequestOptions({ headers: headers });
 
       return this.http.post(url1,user1,options)
-        .map((response:Response)=>return response.json());
+        .map((response:Response)=>{return response.json();});
   }
   deleteSelected(idList:string[]){
       const url2dlt:string=this.urlcompleted+'/deleteusers?idList=['+idList+']';

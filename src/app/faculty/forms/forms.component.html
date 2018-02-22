@@ -35,7 +35,7 @@
   </div>
   <div class="card-footer">
     <div class="btn-group m-2" style="width:100%;box-shadow:2px 2px 5px lightgray,-2px -2px 5px lightgray;">
-    <button class="btn btn-primary c-auto " disabled style="border:1px solid white">Update</button>
+    <button (click)="updateForm(temp);$event.stopPropagation()" class="btn btn-primary c-auto " style="border:1px solid white">Update</button>
     <button (click)="deleteForm(temp); $event.stopPropagation()" class="btn btn-primary c-auto" style="border:1px solid white">Delete</button>
     </div>
   </div>
